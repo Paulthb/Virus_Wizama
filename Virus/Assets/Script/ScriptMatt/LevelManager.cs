@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour {
     {
         TextAsset _bindData = Resources.Load("Level1") as TextAsset;
         string _data = _bindData.text.Replace(Environment.NewLine, string.Empty);
+        Debug.Log(_data);
         return _data.Split('-');
     }
 }
