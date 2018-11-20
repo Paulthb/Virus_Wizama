@@ -54,15 +54,16 @@ namespace Assets.Script
             }
 
             m_currentPlayer = playerTab[0];
+            PlayerPosition();
         }
 
         public void InitTilesTab(GameObject[] TilesTab)
         {
-            m_tilesTab = TilesTab;
+            m_tilesTab = TilesTab;           
+        }
 
-            Debug.Log(m_playerTab[0]);
-            Debug.Log(m_tilesTab[0]);
-
+        public void PlayerPosition()
+        {
             m_playerTab[0].transform.position = m_tilesTab[0].transform.position;
             m_playerTab[1].transform.position = m_tilesTab[11].transform.position;
             m_playerTab[2].transform.position = m_tilesTab[72].transform.position;
