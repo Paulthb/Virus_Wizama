@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Assets.Script;
 
 public class LevelManager : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] _tilePrefabs;
-    
+
+    [SerializeField]
+    private Player[] m_playerTab;
+
+    private List<GameObject> TilesList = new List<GameObject>();
+
     public float TileSize // Calculate the tile Size
     {
         get { return _tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
-}
+    }
 
-	void Start () { 
+    void Awake ()
+    {
         CreateLevel(); //Function called to generate the level
-	}
-	
-	void Update () {
+        Debug.Log("AWWWWWAAAAAAKKKEEE");
+
+        GameManager.GetManager().InitGame(m_playerTab);
+    }
+
+    void Update () {
 		
 	}
 
@@ -39,6 +49,8 @@ public class LevelManager : MonoBehaviour {
                 PlaceTile(_newTiles[x].ToString(),x,y,_worldStart); //Place a tile each time this function is called
             }
         }
+
+        GameManager.GetManager().InitTilesTab(TilesList.ToArray());//on envoie la liste de tiles sous forme de tableau au gameManager
     }
 
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)
@@ -47,6 +59,8 @@ public class LevelManager : MonoBehaviour {
         Debug.Log(_tileIndex);
         GameObject _currentTile = Instantiate(_tilePrefabs[_tileIndex]); //Create a tile at the current position
         _currentTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0); //Move to next position
+
+        TilesList.Add(_currentTile);//les tiles sont stocké dans la liste au fur et à mesure
     }
 
     private string[] ReadLevel()
