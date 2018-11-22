@@ -100,17 +100,13 @@ public class TilesScript : MonoBehaviour {
     public void FindNeighbors()
     {
         Reset();
-
-        CheckTile(_forward);
-        CheckTile(-_forward);
-        CheckTile(_right);
-        CheckTile(-_right);
+        CheckTile();
     }
 
-    private void CheckTile(Vector3 direction)
+    private void CheckTile()
     {
-        Vector2 _size = new Vector2(1.333333f, 1.333333f);
-        Collider2D[] _colliders = Physics2D.OverlapBoxAll(_center, _size, 45.0f);
+        Vector2 _size = new Vector2(1.0f, 1.0f);
+        Collider2D[] _colliders = Physics2D.OverlapBoxAll(transform.position, _size, 45.0f);
 
         foreach(Collider2D item in _colliders)
         {

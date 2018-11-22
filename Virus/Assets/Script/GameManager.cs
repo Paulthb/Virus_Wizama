@@ -28,7 +28,7 @@ namespace Assets.Script
         Stack<TilesScript> path = new Stack<TilesScript>(); // je sais pas encore à quoi ça sert
         TilesScript _currentTile;
 
-        private int _move = 5;
+        private int _move = 3;
         private int _moveSpeed = 2;
         private Vector3 _velocity = new Vector3();
         private Vector3 _heading = new Vector3();
@@ -48,7 +48,9 @@ namespace Assets.Script
         private void ComputeAdjacencyLists()
         {
             foreach (TilesScript tile in m_tilesTab)
+            {
                 tile.FindNeighbors();
+            }
         }
 
         private void FindSelectableTiles()
@@ -120,8 +122,9 @@ namespace Assets.Script
                 m_playerTab[i].Talk();
             }
 
-            m_currentPlayer = playerTab[0];             // Pour les tests
             PlayerPosition();
+            m_currentPlayer = playerTab[0];
+            FindSelectableTiles();
         }
 
         public void InitTilesTab(TilesScript[] TilesTab)

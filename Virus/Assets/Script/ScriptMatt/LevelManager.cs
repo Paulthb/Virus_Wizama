@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour {
         _tmpTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0); //Move to next position
         TilesList.Add(_tmpTile.GetComponent<TilesScript>());//les tiles sont stocké dans la liste au fur et à mesure
     }
-    *
+    
     private string[] ReadLevel()
     {
         TextAsset _bindData = Resources.Load(_levelName) as TextAsset;
