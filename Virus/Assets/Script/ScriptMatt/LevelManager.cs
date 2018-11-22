@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour {
     void Awake ()
     {
         CreateLevel(); //Function called to generate the level
-        GameManager.GetManager().InitGame(m_playerTab);
+        //GameManager.GetManager().InitGame(m_playerTab);
     }
 
     void Update () {
@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         GameManager.GetManager().InitTilesTab(TilesList.ToArray());//on envoie la liste de tiles sous forme de tableau au gameManager
+        GameManager.GetManager().InitGame(m_playerTab);
     }
 
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)

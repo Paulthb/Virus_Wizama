@@ -21,6 +21,8 @@ namespace Assets.Script
         public Player m_currentPlayer;
         public TilesScript[] m_tilesTab;
 
+        public int m_diceValue;
+
         // -------------------- ADD 22/11 (Tactical Movement)
 
         List<TilesScript> _selectableTiles = new List<TilesScript>();
@@ -72,7 +74,7 @@ namespace Assets.Script
                 _selectableTiles.Add(t);
                 t.SetSelectableBool(true);
 
-                if(t.GetDistance() < _move)
+                if(t.GetDistance() < m_diceValue)
                 {     
 
                     foreach(TilesScript tile in t._adjacentTiles)
@@ -99,7 +101,7 @@ namespace Assets.Script
             P3,
             P4
         }
-        //public PlayerRound
+        public PlayerRound m_currentPlayerRound = PlayerRound.P1;
 
         // Use this for initialization
         void Start()
@@ -124,25 +126,29 @@ namespace Assets.Script
 
             PlayerPosition();
             m_currentPlayer = playerTab[0];
-            FindSelectableTiles();
+            NextRound();
+            //FindSelectableTiles();
         }
 
         public void InitTilesTab(TilesScript[] TilesTab)
         {
+            Debug.Log(TilesTab);
             m_tilesTab = TilesTab;           
         }
 
         public void PlayerPosition()
         {
             m_playerTab[0].transform.position = m_tilesTab[0].transform.position;
-           /* m_playerTab[1].transform.position = m_tilesTab[11].transform.position;
+            m_playerTab[1].transform.position = m_tilesTab[11].transform.position;
             m_playerTab[2].transform.position = m_tilesTab[72].transform.position;
-            m_playerTab[3].transform.position = m_tilesTab[83].transform.position;*/
+            m_playerTab[3].transform.position = m_tilesTab[83].transform.position;
         }
 
-        //public void NextRound()
-        //{
-        //    if (pla)
-        //}
+        public void NextRound()
+        {
+            m_diceValue = Random.Range(1, 6);
+            Debug.Log("le dé donne : " + m_diceValue);
+            FindSelectableTiles();
+        }
     }
 }

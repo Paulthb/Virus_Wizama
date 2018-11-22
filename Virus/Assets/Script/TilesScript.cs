@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TilesScript : MonoBehaviour {
 
@@ -24,6 +25,8 @@ public class TilesScript : MonoBehaviour {
     private float _width;
     private Vector2 _center;
 
+    private Button m_tileButton;
+
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,6 +34,8 @@ public class TilesScript : MonoBehaviour {
         _forward = new Vector3(0, _width + _offset,0);
         _right = new Vector3(_width + _offset,0,0);
         _center = new Vector2(transform.position.x + (_width / 2), transform.position.y - (_width / 2));
+
+        m_tileButton = GetComponent<Button>();
     }
 
     private void Update()
@@ -110,14 +115,18 @@ public class TilesScript : MonoBehaviour {
 
         foreach(Collider2D item in _colliders)
         {
-            Debug.Log("je compte");
+            //Debug.Log("je compte");
             TilesScript tile = item.GetComponent<TilesScript>(); //check si c'est bien une tile
             if(tile != null && tile._walkableTile)
             {
-
                 _adjacentTiles.Add(tile);
             }
         }
+    }
+
+    public void TileButton()
+    {
+        Debug.Log("LE BOUTTON MARCHE");
     }
 
     //SETTERS
@@ -183,4 +192,17 @@ public class TilesScript : MonoBehaviour {
     }
     /* Alors 2 possibilités : si on reste sur un pivot top left on va peut être devoir changer la variable offset pour être bien au centre de la tile. Sinon on change le pivot top left
         et on bidouille le LevelManager pour la génération du level */
+
+
+
+/* remplacer tout les booleens par l'enum en dessous et modifié le code en fonction :
+ public enum tilesState
+    {
+        CURRENT;
+        TARGET;
+        SELECT;
+        WALKABLE;
+    }
+    public tileState m_currentTileState = tileState.CURRENT;*/
+
 }
