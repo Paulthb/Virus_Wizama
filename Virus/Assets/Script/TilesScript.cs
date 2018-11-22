@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Assets.Script;
 
 public class TilesScript : MonoBehaviour {
 
@@ -25,8 +25,6 @@ public class TilesScript : MonoBehaviour {
     private float _width;
     private Vector2 _center;
 
-    private Button m_tileButton;
-
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,7 +33,6 @@ public class TilesScript : MonoBehaviour {
         _right = new Vector3(_width + _offset,0,0);
         _center = new Vector2(transform.position.x + (_width / 2), transform.position.y - (_width / 2));
 
-        m_tileButton = GetComponent<Button>();
     }
 
     private void Update()
@@ -124,9 +121,13 @@ public class TilesScript : MonoBehaviour {
         }
     }
 
-    public void TileButton()
+    void OnMouseDown()
     {
-        Debug.Log("LE BOUTTON MARCHE");
+        if (_selectableTile)
+        {
+            GameManager.GetManager().MovePlayer(transform);
+            Debug.Log("LE BOUTTON MARCHE");
+        }
     }
 
     //SETTERS

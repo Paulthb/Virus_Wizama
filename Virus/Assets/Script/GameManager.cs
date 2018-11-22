@@ -150,5 +150,10 @@ namespace Assets.Script
             Debug.Log("le dé donne : " + m_diceValue);
             FindSelectableTiles();
         }
+
+        public void MovePlayer(Transform tilesPosition)
+        {
+            m_currentPlayer.transform.position = tilesPosition.position;
+        }
     }
 }
