@@ -22,6 +22,16 @@ namespace Assets.Script
         public TilesScript[] m_tilesTab;
 
         public int m_diceValue;
+        public int _diceValue// ceci est une propertie;
+        {
+            get { return m_diceValue; }
+            set
+            {
+                m_diceValue = value;
+                if (m_diceValue == 0)
+                    ChangePlayerRound();//changement de tour quand le compteur du dé est à 0;
+            }
+        }
 
         // -------------------- ADD 22/11 (Tactical Movement)
 
@@ -144,16 +154,45 @@ namespace Assets.Script
             m_playerTab[3].transform.position = m_tilesTab[83].transform.position;
         }
 
-        public void NextRound()
+        public void ChangePlayerRound() // pas ouf peut être...
+        {
+            if(m_currentPlayerRound == PlayerRound.P1)
+            {
+                m_currentPlayerRound = PlayerRound.P2;
+                m_currentPlayer = m_playerTab[1];
+                NextRound();
+            }
+            else if (m_currentPlayerRound == PlayerRound.P2)
+            {
+                m_currentPlayerRound = PlayerRound.P3;
+                m_currentPlayer = m_playerTab[2];
+                NextRound();
+            }
+            else if (m_currentPlayerRound == PlayerRound.P3)
+            {
+                m_currentPlayerRound = PlayerRound.P4;
+                m_currentPlayer = m_playerTab[3];
+                NextRound();
+            }
+            else
+            {
+                m_currentPlayerRound = PlayerRound.P1;
+                m_currentPlayer = m_playerTab[0];
+                NextRound();
+            }
+        }
+
+        public void NextRound()//déroulement d'un tour
         {
             m_diceValue = Random.Range(1, 6);
             Debug.Log("le dé donne : " + m_diceValue);
             FindSelectableTiles();
         }
 
-        public void MovePlayer(Transform tilesPosition)
+        public void MovePlayer(Transform tilesPosition)//appelé lorsqu'on click sur une tiles accessible par le player;
         {
             m_currentPlayer.transform.position = tilesPosition.position;
+            _diceValue--;// TEMPORAIRE le temps de faire le comptage de case par avancement.
         }
     }
 }
