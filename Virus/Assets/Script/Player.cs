@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    private TilesScript _currentTile;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,4 +19,6 @@ public class Player : MonoBehaviour {
     {
         Debug.Log("Je m'appelle : " + gameObject.name);
     }
+    
 }
+

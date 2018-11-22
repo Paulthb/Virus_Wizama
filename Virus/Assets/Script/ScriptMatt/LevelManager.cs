@@ -12,7 +12,10 @@ public class LevelManager : MonoBehaviour {
     [SerializeField]
     private Player[] m_playerTab;
 
-    private List<GameObject> TilesList = new List<GameObject>();
+    [SerializeField]
+    private String _levelName = "Level1";
+
+    private List<TilesScript> TilesList = new List<TilesScript>();
 
     public float TileSize // Calculate the tile Size
     {
@@ -22,8 +25,6 @@ public class LevelManager : MonoBehaviour {
     void Awake ()
     {
         CreateLevel(); //Function called to generate the level
-        Debug.Log("AWWWWWAAAAAAKKKEEE");
-
         GameManager.GetManager().InitGame(m_playerTab);
     }
 
@@ -56,16 +57,14 @@ public class LevelManager : MonoBehaviour {
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)
     {
         int _tileIndex = int.Parse(tileType); //string to int
-        Debug.Log(_tileIndex);
-        GameObject _currentTile = Instantiate(_tilePrefabs[_tileIndex]); //Create a tile at the current position
-        _currentTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0); //Move to next position
-
-        TilesList.Add(_currentTile);//les tiles sont stocké dans la liste au fur et à mesure
+        GameObject _tmpTile = Instantiate(_tilePrefabs[_tileIndex]); //Create a tile at the current position
+        _tmpTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0); //Move to next position
+        TilesList.Add(_tmpTile.GetComponent<TilesScript>());//les tiles sont stocké dans la liste au fur et à mesure
     }
-
+    *
     private string[] ReadLevel()
     {
-        TextAsset _bindData = Resources.Load("Level1") as TextAsset;
+        TextAsset _bindData = Resources.Load(_levelName) as TextAsset;
         string _data = _bindData.text.Replace(Environment.NewLine, string.Empty);
         Debug.Log(_data);
         return _data.Split('-');
