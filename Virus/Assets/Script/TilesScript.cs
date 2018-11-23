@@ -25,14 +25,20 @@ public class TilesScript : MonoBehaviour {
     private float _width;
     private Vector2 _center;
 
+    private Color _redColor;
+    private Vector2 _size;
+
     private void Start()
     {
+        _size = GetComponent<BoxCollider2D>().size;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _width = _spriteRenderer.sprite.bounds.size.x;
         _forward = new Vector3(0, _width + _offset,0);
         _right = new Vector3(_width + _offset,0,0);
         _center = new Vector2(transform.position.x + (_width / 2), transform.position.y - (_width / 2));
-
+        _redColor = Color.red;
+        _redColor.a = 0.80f;
+        
     }
 
     private void Update()
@@ -47,7 +53,7 @@ public class TilesScript : MonoBehaviour {
         }
         else if (_selectableTile && _walkableTile)
         {
-            _spriteRenderer.color = Color.red;
+            _spriteRenderer.color = _redColor;
         }
         else
         {
@@ -107,7 +113,6 @@ public class TilesScript : MonoBehaviour {
 
     private void CheckTile()
     {
-        Vector2 _size = new Vector2(1.0f, 1.0f);
         Collider2D[] _colliders = Physics2D.OverlapBoxAll(transform.position, _size, 45.0f);
 
         foreach(Collider2D item in _colliders)

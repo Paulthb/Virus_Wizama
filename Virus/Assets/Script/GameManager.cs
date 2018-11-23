@@ -130,7 +130,7 @@ namespace Assets.Script
             PlayerPosition();
             m_currentPlayer = playerTab[0];
             NextRound();
-            //FindSelectableTiles();
+            FindSelectableTiles();
         }
 
         public void InitTilesTab(TilesScript[] TilesTab)
