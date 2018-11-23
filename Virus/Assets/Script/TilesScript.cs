@@ -45,7 +45,7 @@ public class TilesScript : MonoBehaviour {
         {
             _spriteRenderer.color = Color.green;
         }
-        else if (_selectableTile)
+        else if (_selectableTile && _walkableTile)
         {
             _spriteRenderer.color = Color.red;
         }
@@ -191,8 +191,7 @@ public class TilesScript : MonoBehaviour {
     {
         return _distance;
     }
-    /* Alors 2 possibilités : si on reste sur un pivot top left on va peut être devoir changer la variable offset pour être bien au centre de la tile. Sinon on change le pivot top left
-        et on bidouille le LevelManager pour la génération du level */
+    
 
 
 

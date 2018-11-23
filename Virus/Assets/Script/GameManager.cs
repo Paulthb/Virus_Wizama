@@ -45,16 +45,18 @@ namespace Assets.Script
         private Vector3 _velocity = new Vector3();
         private Vector3 _heading = new Vector3();
         
-        private void GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
+        private TilesScript GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
         {
-            //_currentTile = GetTargetTile(m_currentPlayer.gameObject);
+            TilesScript t = new TilesScript();
             foreach(TilesScript item in m_tilesTab)
             {
-                if(player.transform.position == item.transform.position)          // EDIT : 2 possibilités enfaite soit gérer ça avec le trigger stay du player ou de la tile soit de cette manière
-                {                                                                 // mais je pense que la condition d'égalité est assez bancale  
-                    _currentTile = item;
+                if (player.transform.position == item.transform.position)
+                {
+                    return item;
                 }
             }
+            Debug.Log("Impossible de trouver la current tile");
+            return t;
         }
 
         private void ComputeAdjacencyLists()
@@ -68,7 +70,7 @@ namespace Assets.Script
         private void FindSelectableTiles()
         {
             ComputeAdjacencyLists();
-            GetCurrentTile(m_currentPlayer);
+            _currentTile = GetCurrentTile(m_currentPlayer);
 
             // Start BFS
 
@@ -103,7 +105,8 @@ namespace Assets.Script
 
         
 
-        // ---------------------    
+        // ---------------------   
+        
         public enum PlayerRound
         {
             P1 = 0,
@@ -113,18 +116,7 @@ namespace Assets.Script
         }
         public PlayerRound m_currentPlayerRound = PlayerRound.P1;
 
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (_diceValue == 0)
-                Debug.Log("Changer de tour");
-        }
+        
 
         public void InitGame(Player[] playerTab)
         {
@@ -191,15 +183,18 @@ namespace Assets.Script
 
         public void MovePlayer(GameObject tile)//appelé lorsqu'on click sur une tiles accessible par le player;
         {
-            m_currentPlayer.transform.position = tile.transform.position;
-            /*_diceValue--;// TEMPORAIRE le temps de faire le comptage de case par avancement.*/
-            TilesScript tileObject = tile.GetComponent<TilesScript>();
-            _diceValue -= tileObject.GetDistance();
-            foreach (TilesScript t in m_tilesTab)
-                t.Reset();
+            if (tile.GetComponent<TilesScript>().GetWalkableBool())
+            {
+                GetCurrentTile(m_currentPlayer).SetWalkableBool(true);
+                m_currentPlayer.transform.position = tile.transform.position;
+                TilesScript tileObject = tile.GetComponent<TilesScript>();
+                _diceValue -= tileObject.GetDistance();
+                tileObject.SetWalkableBool(false);
+                foreach (TilesScript t in m_tilesTab)
+                    t.Reset();
 
-            FindSelectableTiles();
-
+                FindSelectableTiles();
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour {
     private String _levelName = "Level1";
 
     private List<TilesScript> TilesList = new List<TilesScript>();
+    private float _offset;
 
     public float TileSize // Calculate the tile Size
     {
@@ -24,8 +25,9 @@ public class LevelManager : MonoBehaviour {
 
     void Awake ()
     {
+        _offset = _tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x / 2;
         CreateLevel(); //Function called to generate the level
-        //GameManager.GetManager().InitGame(m_playerTab);
+  
     }
 
     void Update () {
@@ -40,7 +42,11 @@ public class LevelManager : MonoBehaviour {
         int _mapYSize = _mapData.Length;                  //Height of the map  
 
         Vector3 _worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height,0)); //Set the starting point of generation to top left corner
+        _worldStart.x += _offset;
+        _worldStart.y -= _offset;
+
         //Grid is 5 by 5
+        Debug.Log("World Start at : " + _worldStart);
         for (int y = 0; y < _mapYSize; y++) //y position
         {
             char[] _newTiles = _mapData[y].ToCharArray(); 
