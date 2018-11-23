@@ -86,7 +86,7 @@ public class TilesScript : MonoBehaviour {
 
     /* ^^^^ J'hésite à foutre ça dans l'update mais vu que ça call à chaque frame je préfère changer la couleur une seule fois et le foutre dans les Mouse ^^^^ */
 
-    private void Reset()
+    public void Reset()
     {
         _adjacentTiles.Clear();
 
@@ -125,7 +125,7 @@ public class TilesScript : MonoBehaviour {
     {
         if (_selectableTile)
         {
-            GameManager.GetManager().MovePlayer(transform);
+            GameManager.GetManager().MovePlayer(gameObject);
             Debug.Log("LE BOUTTON MARCHE");
         }
     }

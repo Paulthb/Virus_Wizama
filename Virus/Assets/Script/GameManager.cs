@@ -122,7 +122,8 @@ namespace Assets.Script
         // Update is called once per frame
         void Update()
         {
-
+            if (_diceValue == 0)
+                Debug.Log("Changer de tour");
         }
 
         public void InitGame(Player[] playerTab)
@@ -185,14 +186,20 @@ namespace Assets.Script
         public void NextRound()//déroulement d'un tour
         {
             m_diceValue = Random.Range(1, 6);
-            Debug.Log("le dé donne : " + m_diceValue);
             FindSelectableTiles();
         }
 
-        public void MovePlayer(Transform tilesPosition)//appelé lorsqu'on click sur une tiles accessible par le player;
+        public void MovePlayer(GameObject tile)//appelé lorsqu'on click sur une tiles accessible par le player;
         {
-            m_currentPlayer.transform.position = tilesPosition.position;
-            _diceValue--;// TEMPORAIRE le temps de faire le comptage de case par avancement.
+            m_currentPlayer.transform.position = tile.transform.position;
+            /*_diceValue--;// TEMPORAIRE le temps de faire le comptage de case par avancement.*/
+            TilesScript tileObject = tile.GetComponent<TilesScript>();
+            _diceValue -= tileObject.GetDistance();
+            foreach (TilesScript t in m_tilesTab)
+                t.Reset();
+
+            FindSelectableTiles();
+
         }
     }
 }
