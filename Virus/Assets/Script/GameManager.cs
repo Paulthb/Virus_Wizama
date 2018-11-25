@@ -47,7 +47,6 @@ namespace Assets.Script
         
         private TilesScript GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
         {
-            TilesScript t = new TilesScript();
             foreach(TilesScript item in m_tilesTab)
             {
                 if (player.transform.position == item.transform.position)
@@ -56,7 +55,7 @@ namespace Assets.Script
                 }
             }
             Debug.Log("Impossible de trouver la current tile");
-            return t;
+            return null;
         }
 
         private void ComputeAdjacencyLists()

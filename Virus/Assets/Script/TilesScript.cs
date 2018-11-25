@@ -114,10 +114,10 @@ public class TilesScript : MonoBehaviour {
     private void CheckTile()
     {
         Collider2D[] _colliders = Physics2D.OverlapBoxAll(transform.position, _size, 45.0f);
-
+        
         foreach(Collider2D item in _colliders)
         {
-            //Debug.Log("je compte");
+            Debug.Log("je compte");
             TilesScript tile = item.GetComponent<TilesScript>(); //check si c'est bien une tile
             if(tile != null && tile._walkableTile)
             {
@@ -131,11 +131,10 @@ public class TilesScript : MonoBehaviour {
         if (_selectableTile)
         {
             GameManager.GetManager().MovePlayer(gameObject);
-            Debug.Log("LE BOUTTON MARCHE");
         }
     }
 
-    //SETTERS
+    //SETTERS      (ya un exemple de propertie dans le game manager) ********
 
     public void SetSelectableBool (bool b)
     {
