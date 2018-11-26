@@ -20,9 +20,7 @@ public class TilesScript : MonoBehaviour {
 
     //Variables hors tuto
   
-    private float _offset = 0.001f; //Pour être sûr d'être sur le collider
     private float _width;
-    private Vector2 _center;
 
     private Color _redColor;
     private Vector2 _size;
@@ -33,10 +31,8 @@ public class TilesScript : MonoBehaviour {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _width = _spriteRenderer.sprite.bounds.size.x;
        
-        _center = new Vector2(transform.position.x + (_width / 2), transform.position.y - (_width / 2));
         _redColor = Color.red;
         _redColor.a = 0.80f;
-        
     }
 
     private void Update()
@@ -86,7 +82,6 @@ public class TilesScript : MonoBehaviour {
         
         foreach(Collider2D item in _colliders)
         {
-            Debug.Log("je compte");
             TilesScript tile = item.GetComponent<TilesScript>(); //check si c'est bien une tile
             if(tile != null && tile._walkableTile)
             {
@@ -164,18 +159,18 @@ public class TilesScript : MonoBehaviour {
     {
         return _distance;
     }
-    
 
 
 
-/* remplacer tout les booleens par l'enum en dessous et modifié le code en fonction :
- public enum tilesState
-    {
-        CURRENT;
-        TARGET;
-        SELECT;
-        WALKABLE;
-    }
-    public tileState m_currentTileState = tileState.CURRENT;*/
+
+    //remplacer tout les booleens par l'enum en dessous et modifié le code en fonction :
+     //public enum TILES_STATE
+     //   {
+     //       CURRENT,
+     //       TARGET,
+     //       SELECT,
+     //       WALKABLE,
+     //   }
+     //   public TILES_STATE m_currentTileState = TILES_STATE.CURRENT;
 
 }

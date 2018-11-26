@@ -39,11 +39,6 @@ namespace Assets.Script
 
         Stack<TilesScript> path = new Stack<TilesScript>(); // je sais pas encore à quoi ça sert
         TilesScript _currentTile;
-
-        private int _move = 3;
-        private int _moveSpeed = 2;
-        private Vector3 _velocity = new Vector3();
-        private Vector3 _heading = new Vector3();
         
         private TilesScript GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
         {
@@ -120,30 +115,22 @@ namespace Assets.Script
         public void InitGame(Player[] playerTab)
         {
             m_playerTab = playerTab;
-
-            for (int i = 0; i < m_playerTab.Length; i++)
-            {
-                m_playerTab[i].Talk();
-            }
-
             PlayerPosition();
             m_currentPlayer = playerTab[0];
             NextRound();
-            FindSelectableTiles();
         }
 
         public void InitTilesTab(TilesScript[] TilesTab)
         {
-            Debug.Log(TilesTab);
             m_tilesTab = TilesTab;           
         }
 
         public void PlayerPosition()
         {
-            m_playerTab[0].transform.position = m_tilesTab[0].transform.position;
-            m_playerTab[1].transform.position = m_tilesTab[11].transform.position;
-            m_playerTab[2].transform.position = m_tilesTab[72].transform.position;
-            m_playerTab[3].transform.position = m_tilesTab[83].transform.position;
+            m_playerTab[0].transform.position = m_tilesTab[15].transform.position;
+            m_playerTab[1].transform.position = m_tilesTab[26].transform.position;
+            m_playerTab[2].transform.position = m_tilesTab[99].transform.position;
+            m_playerTab[3].transform.position = m_tilesTab[110].transform.position;
         }
 
         public void ChangePlayerRound() // pas ouf peut être...

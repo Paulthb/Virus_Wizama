@@ -46,7 +46,7 @@ public class LevelManager : MonoBehaviour {
         _worldStart.y -= _offset;
 
         //Grid is 5 by 5
-        Debug.Log("World Start at : " + _worldStart);
+
         for (int y = 0; y < _mapYSize; y++) //y position
         {
             char[] _newTiles = _mapData[y].ToCharArray(); 
@@ -73,7 +73,6 @@ public class LevelManager : MonoBehaviour {
     {
         TextAsset _bindData = Resources.Load(_levelName) as TextAsset;
         string _data = _bindData.text.Replace(Environment.NewLine, string.Empty);
-        Debug.Log(_data);
         return _data.Split('-');
     }
 }
