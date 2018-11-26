@@ -19,8 +19,7 @@ public class TilesScript : MonoBehaviour {
     private int _distance = 0; //la variable dans laquelle on va stocker la distance entre le player et cette tile
 
     //Variables hors tuto
-    private Vector3 _forward;   //En gros dans le tuto il utilise les Vector3.forward car ses tiles font 1 sur 1
-    private Vector3 _right;
+  
     private float _offset = 0.001f; //Pour être sûr d'être sur le collider
     private float _width;
     private Vector2 _center;
@@ -33,8 +32,7 @@ public class TilesScript : MonoBehaviour {
         _size = GetComponent<BoxCollider2D>().size;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _width = _spriteRenderer.sprite.bounds.size.x;
-        _forward = new Vector3(0, _width + _offset,0);
-        _right = new Vector3(_width + _offset,0,0);
+       
         _center = new Vector2(transform.position.x + (_width / 2), transform.position.y - (_width / 2));
         _redColor = Color.red;
         _redColor.a = 0.80f;
@@ -61,36 +59,7 @@ public class TilesScript : MonoBehaviour {
         }
 
     }
-    /*
-    private void OnMouseEnter()
-    {
-        if(_selectableTile)
-        {
-            _targetTile = true;
-            _spriteRenderer.color = Color.green;
-        }
-        
-    }
-    private void OnMouseExit()
-    {
-        _targetTile = false;
-        if (_selectableTile)
-            _spriteRenderer.color = Color.red;          //Impossible d'expliquer ça en commentaire on vera sur discord
-        else
-            _spriteRenderer.color = Color.white;
 
-    }
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(0) && _targetTile)
-        {
-            Debug.Log("Case Sélectionnée");
-            _spriteRenderer.color = Color.green;
-            // et Déplace le joueur à cette case 
-        }
-    }*/
-
-    /* ^^^^ J'hésite à foutre ça dans l'update mais vu que ça call à chaque frame je préfère changer la couleur une seule fois et le foutre dans les Mouse ^^^^ */
 
     public void Reset()
     {
