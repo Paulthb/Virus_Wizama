@@ -40,7 +40,7 @@ namespace Assets.Script
         Stack<TilesScript> path = new Stack<TilesScript>(); // je sais pas encore à quoi ça sert
         TilesScript _currentTile;
         
-        private TilesScript GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
+        public TilesScript GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
         {
             foreach(TilesScript item in m_tilesTab)
             {
@@ -181,6 +181,11 @@ namespace Assets.Script
 
                 FindSelectableTiles();
             }
+        }
+
+        public void EndTurn()
+        {
+            ChangePlayerRound();
         }
     }
 }

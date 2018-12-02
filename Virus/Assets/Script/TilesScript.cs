@@ -160,17 +160,4 @@ public class TilesScript : MonoBehaviour {
         return _distance;
     }
 
-
-
-
-    //remplacer tout les booleens par l'enum en dessous et modifié le code en fonction :
-     //public enum TILES_STATE
-     //   {
-     //       CURRENT,
-     //       TARGET,
-     //       SELECT,
-     //       WALKABLE,
-     //   }
-     //   public TILES_STATE m_currentTileState = TILES_STATE.CURRENT;
-
 }
