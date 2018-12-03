@@ -20,8 +20,8 @@ public class BombeScript : MonoBehaviour {
 	void Start ()
     {
         m_boxCollider = GetComponent<BoxCollider2D>();
-        m_boxSizeH = new Vector2(((m_range * 2) + 1) * m_boxwidth, 0.75f); //Prépare la box qui détectera les collisions sur le nombre de tile affectées sur l'axe horizontal
-        m_boxSizeV = new Vector2(0.75f, ((m_range * 2) + 1) * m_boxwidth); //Prépare la box qui détectera les collisions sur le nombre de tile affectées sur l'axe vertical
+        m_boxSizeH = new Vector2((((m_range * 2) + 1) * m_boxwidth) - 0.2f, 0.8f); //Prépare la box qui détectera les collisions sur le nombre de tile affectées sur l'axe horizontal
+        m_boxSizeV = new Vector2(0.8f, (((m_range * 2) + 1) * m_boxwidth) - 0.2f); //Prépare la box qui détectera les collisions sur le nombre de tile affectées sur l'axe vertical
         GetAffectedTiles();
 
         Debug.Log("vector 2D horizontal : " + m_boxSizeH);
