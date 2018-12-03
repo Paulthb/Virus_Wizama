@@ -18,6 +18,8 @@ public class LevelManager : MonoBehaviour {
     private List<TilesScript> TilesList = new List<TilesScript>();
     private float _offset;
 
+    private int m_idTiles = 0;
+
     public float TileSize // Calculate the tile Size
     {
         get { return _tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x; }
@@ -66,7 +68,9 @@ public class LevelManager : MonoBehaviour {
         int _tileIndex = int.Parse(tileType); //string to int
         GameObject _tmpTile = Instantiate(_tilePrefabs[_tileIndex]); //Create a tile at the current position
         _tmpTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0); //Move to next position
+        _tmpTile.GetComponent<TilesScript>().Id = m_idTiles;
         TilesList.Add(_tmpTile.GetComponent<TilesScript>());//les tiles sont stocké dans la liste au fur et à mesure
+        m_idTiles = m_idTiles + 1;
     }
     
     private string[] ReadLevel()

@@ -10,6 +10,12 @@ public class TilesScript : MonoBehaviour {
     private bool _targetTile = false;
     private bool _selectableTile = false;
     private bool _walkableTile = true;
+    private bool _destroyTile = false;
+    public bool destroyTile
+    {
+        get { return _destroyTile; }
+        set { _destroyTile = value; }
+    }
 
     public List<TilesScript> _adjacentTiles = new List<TilesScript>(); //Pas de déplacement en diagonal on va utiliser cette liste pour se déplacer
 
@@ -21,6 +27,14 @@ public class TilesScript : MonoBehaviour {
     //Variables hors tuto
   
     private float _width;
+
+    private int m_id;
+    public int Id
+    {
+        get { return m_id; }
+        set { m_id = value; }
+    }
+
 
     private Color _redColor;
     private Vector2 _size;
@@ -48,6 +62,10 @@ public class TilesScript : MonoBehaviour {
         else if (_selectableTile && _walkableTile)
         {
             _spriteRenderer.color = _redColor;
+        }
+        else if (_destroyTile)
+        {
+            _spriteRenderer.color = Color.black;
         }
         else
         {

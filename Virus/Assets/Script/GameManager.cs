@@ -152,7 +152,7 @@ namespace Assets.Script
                 m_currentPlayerRound = PlayerRound.P4;
                 m_currentPlayer = m_playerTab[3];
                 NextRound();
-            }
+            } 
             else
             {
                 m_currentPlayerRound = PlayerRound.P1;
