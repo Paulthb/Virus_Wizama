@@ -27,9 +27,9 @@ public class BombeScript : MonoBehaviour {
         Debug.Log("vector 2D horizontal : " + m_boxSizeH);
         Debug.Log("vector 2D vertical : " + m_boxSizeV);
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
 		
 	}
