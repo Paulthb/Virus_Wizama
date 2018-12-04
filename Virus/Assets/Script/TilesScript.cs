@@ -35,6 +35,14 @@ public class TilesScript : MonoBehaviour {
         set { m_id = value; }
     }
 
+    public enum TilesType
+    {
+        NORMAL = 0,
+        WALL,
+        BORDER
+    }
+    public TilesType m_currentTilesType = TilesType.NORMAL;///////////////////////// ENUM de la tiles
+
 
     private Color _redColor;
     private Vector2 _size;

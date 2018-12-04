@@ -17,6 +17,13 @@ namespace Assets.Script
             return _manger;
         }
 
+        private List<BombeScript> m_bombList;
+        public List<BombeScript> bombList
+        {
+            get { return m_bombList; }
+            set { m_bombList = value; }
+        }
+
         public Player[] m_playerTab;
         public Player m_currentPlayer;
         public TilesScript[] m_tilesTab;
@@ -118,6 +125,7 @@ namespace Assets.Script
             PlayerPosition();
             m_currentPlayer = playerTab[0];
             NextRound();
+            m_bombList = new List<BombeScript>();
         }
 
         public void InitTilesTab(TilesScript[] TilesTab)
@@ -135,6 +143,8 @@ namespace Assets.Script
 
         public void ChangePlayerRound() // pas ouf peut être...
         {
+            CheckOnBomb();
+
             if(m_currentPlayerRound == PlayerRound.P1)
             {
                 m_currentPlayerRound = PlayerRound.P2;
@@ -186,6 +196,17 @@ namespace Assets.Script
         public void EndTurn()
         {
             ChangePlayerRound();
+        }
+
+        public void CheckOnBomb()
+        {
+            List<BombeScript> copyBombList = new List<BombeScript>();
+            copyBombList.AddRange(m_bombList);
+
+            foreach(BombeScript bomb in copyBombList)
+            {
+                bomb.UpdateCounter();
+            }
         }
     }
 }
