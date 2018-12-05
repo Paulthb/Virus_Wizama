@@ -26,7 +26,7 @@ public class BombeScript : MonoBehaviour {
     //private List<TilesScript> m_affectedTilesH= new List<TilesScript>(); //Liste pour les tiles affectées sur l'axe horizontal
 
     
-    private TilesScript[] m_affectedTilesL;
+    private List<TilesScript> m_affectedTilesL = new List<TilesScript>();
  
 
     private BoxCollider2D m_boxCollider;
@@ -89,48 +89,56 @@ public class BombeScript : MonoBehaviour {
     }
     private void GetAffectedTileLeft()
     {
-        int i = 0;
         Collider2D[] _collidersL = Physics2D.OverlapBoxAll(new Vector2(transform.position.x - m_offset, transform.position.y), m_boxSizeH, 0); //Le collider sur le côté L
-        foreach (Collider2D item in _collidersL)
-        {
-            TilesScript tile = item.GetComponent<TilesScript>(); //check si c'est bien une tile
-            if (tile != null)
-            {
-                i++;
-            }
-
-        }
-        m_affectedTilesL = new TilesScript[i]; //On setup la length du tableau par rapport à celle du tableau return par le collider
-
-        i = 0;
 
         foreach (Collider2D item in _collidersL)
         {
             TilesScript tile = item.GetComponent<TilesScript>(); //check si c'est bien une tile
             if (tile != null)
             {
-                m_affectedTilesL[i] = tile;
-                i++;
+                m_affectedTilesL.Add(tile);
             }
 
         }
-        Debug.Log(m_affectedTilesL.Length);
 
-        if (m_affectedTilesL.Length > 1)
-        {
-            Array.Sort(m_affectedTilesL, delegate (TilesScript tile1, TilesScript tile2)
-            {
-                return tile2.Id.CompareTo(tile1.Id);
-            });
-        }
+        Debug.Log(m_affectedTilesL.Count+" Tiles ont été détectée");
 
-        for (i = 0; i < m_affectedTilesL.Length; i++)
+        m_affectedTilesL.Sort((a, b) => (b.Id.CompareTo(a.Id)));
+
+        foreach (TilesScript tile in m_affectedTilesL)
+            Debug.Log("ID de la tile affectée : " + tile.Id);
+
+        int count = 0;
+
+        for (count = 0; count < m_affectedTilesL.Count; count++)
         {
-            if (m_affectedTilesL[i].m_currentTilesType == TilesScript.TilesType.WALL || m_affectedTilesL[i].m_currentTilesType == TilesScript.TilesType.BORDER)
+            if (m_affectedTilesL[count].m_currentTilesType == TilesScript.TilesType.BORDER)
+            {               
+                Debug.Log(count + "Tiles vont être détruites");
                 break;
+            }
+            else if (m_affectedTilesL[count].m_currentTilesType == TilesScript.TilesType.WALL)
+            {
+                
+                Debug.Log(count + 1 + "Tiles vont être détruites");
+                break;
+            }
         }
 
-        Debug.Log(i + "Tiles vont être détruites");
+        Debug.Log(count + 1 + " Tiles vont être détruite");
+
+        if(m_affectedTilesL.Count > 0)
+        { 
+            for(int i = count; i < m_affectedTilesL.Count; i++)
+            {
+                m_affectedTilesL.RemoveAt(i);
+            }
+        }
+        
+        foreach (TilesScript tile in m_affectedTilesL)
+            Debug.Log("La tile " + tile.Id + " est dans la liste finale");
+
+        
     }
     private void GetOffSet()
     {
