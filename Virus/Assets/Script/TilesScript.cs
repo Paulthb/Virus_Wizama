@@ -67,13 +67,17 @@ public class TilesScript : MonoBehaviour {
         {
             _spriteRenderer.color = Color.green;
         }
-        else if (_selectableTile && _walkableTile)
+        else if (_selectableTile && _walkableTile && !destroyTile)
         {
-            _spriteRenderer.color = _redColor;
+            _spriteRenderer.color = Color.green;
         }
-        else if (_destroyTile)
+        else if (_destroyTile && !_selectableTile)
         {
             _spriteRenderer.color = Color.black;
+        }
+        else if (_destroyTile && _selectableTile && _walkableTile)
+        {
+            _spriteRenderer.color = Color.red;
         }
         else
         {

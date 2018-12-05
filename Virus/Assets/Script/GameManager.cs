@@ -130,7 +130,11 @@ namespace Assets.Script
 
         public void InitTilesTab(TilesScript[] TilesTab)
         {
-            m_tilesTab = TilesTab;           
+            m_tilesTab = TilesTab;
+            /*foreach(TilesScript tiles in m_tilesTab)
+            {
+                Debug.Log(tiles.m_currentTilesType);        //Le tiles type marche bien
+            }*/
         }
 
         public void PlayerPosition()
