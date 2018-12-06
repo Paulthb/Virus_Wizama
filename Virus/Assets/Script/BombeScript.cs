@@ -101,12 +101,8 @@ public class BombeScript : MonoBehaviour {
 
         }
 
-        Debug.Log(m_affectedTilesL.Count+" Tiles ont été détectée");
-
         m_affectedTilesL.Sort((a, b) => (b.Id.CompareTo(a.Id)));
 
-        foreach (TilesScript tile in m_affectedTilesL)
-            Debug.Log("ID de la tile affectée : " + tile.Id);
 
         int count = 0;
 
@@ -114,22 +110,19 @@ public class BombeScript : MonoBehaviour {
         {
             if (m_affectedTilesL[count].m_currentTilesType == TilesScript.TilesType.BORDER)
             {               
-                Debug.Log(count + "Tiles vont être détruites");
                 break;
             }
             else if (m_affectedTilesL[count].m_currentTilesType == TilesScript.TilesType.WALL)
             {
-                
-                Debug.Log(count + 1 + "Tiles vont être détruites");
+                count++;
                 break;
             }
         }
 
-        Debug.Log(count + 1 + " Tiles vont être détruite");
 
         if(m_affectedTilesL.Count > 0)
         { 
-            for(int i = count; i < m_affectedTilesL.Count; i++)
+            for(int i = m_affectedTilesL.Count - 1; i > count -1; i--)
             {
                 m_affectedTilesL.RemoveAt(i);
             }
