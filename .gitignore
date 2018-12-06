@@ -34,3 +34,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Virus/Assets/Prefab/SpriteNumber\.meta
