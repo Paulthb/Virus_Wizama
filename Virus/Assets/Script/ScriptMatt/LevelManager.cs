@@ -69,6 +69,7 @@ public class LevelManager : MonoBehaviour {
         GameObject _tmpTile = Instantiate(_tilePrefabs[_tileIndex]); //Create a tile at the current position
         _tmpTile.transform.position = new Vector3(worldStart.x + (TileSize * x), worldStart.y - (TileSize * y), 0); //Move to next position
         _tmpTile.GetComponent<TilesScript>().Id = m_idTiles;
+        _tmpTile.GetComponent<TilesScript>().m_currentTilesType = (TilesScript.TilesType)_tileIndex;
         TilesList.Add(_tmpTile.GetComponent<TilesScript>());//les tiles sont stocké dans la liste au fur et à mesure
         m_idTiles = m_idTiles + 1;
     }
