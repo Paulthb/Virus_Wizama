@@ -5,11 +5,35 @@ using Assets.Script;
 
 public class TilesScript : MonoBehaviour {
 
-    private SpriteRenderer _spriteRenderer;
+    #region Propertie
     private bool _currentTile = false;
+    public bool currentTile
+    {
+        get { return _currentTile; }
+        set { _currentTile = value; }
+    }
+
     private bool _targetTile = false;
+    public bool targetTile
+    {
+        get { return _targetTile; }
+        set { _targetTile = value; }
+    }
+
     private bool _selectableTile = false;
+    public bool selectableTile
+    {
+        get { return _selectableTile; }
+        set { _selectableTile = value; }
+    }
+
     private bool _walkableTile = true;
+    public bool walkableTile
+    {
+        get { return _walkableTile; }
+        set { _walkableTile = value; }
+    }
+
     private bool _destroyTile = false;
     public bool destroyTile
     {
@@ -21,12 +45,26 @@ public class TilesScript : MonoBehaviour {
 
     //Les booléens liés au BFS = breadth first search (j'assimile cette notion en écrivant ça)
     private bool _visited = false; //En gros ça permet au "path finding" d'ignorer la case qu'on vient de quitter (je crois)
+    public bool visited
+    {
+        get { return _visited; }
+        set { _visited = value; }
+    }
+
     private TilesScript _parent = null;
+    public TilesScript parent
+    {
+        get { return _parent; }
+        set { _parent = value; }
+    }
     private int _distance = 0; //la variable dans laquelle on va stocker la distance entre le player et cette tile
+    public int distance
+    {
+        get { return _distance; }
+        set { _distance= value; }
+    }
 
     //Variables hors tuto
-  
-    private float _width;
 
     private int m_id;
     public int Id
@@ -34,6 +72,7 @@ public class TilesScript : MonoBehaviour {
         get { return m_id; }
         set { m_id = value; }
     }
+    #endregion
 
     public enum TilesType
     {
@@ -43,7 +82,8 @@ public class TilesScript : MonoBehaviour {
     }
     public TilesType m_currentTilesType = TilesType.NORMAL;///////////////////////// ENUM de la tiles
 
-
+    private SpriteRenderer _spriteRenderer;
+    private float _width;
     private Color _redColor;
     private Vector2 _size;
 
@@ -127,67 +167,4 @@ public class TilesScript : MonoBehaviour {
             GameManager.GetManager().MovePlayer(gameObject);
         }
     }
-
-    //SETTERS      (ya un exemple de propertie dans le game manager) ********
-
-    public void SetSelectableBool (bool b)
-    {
-        _selectableTile = b;
-    }
-    public void SetCurrentBool(bool b)
-    {
-        _currentTile = b;
-    }
-    public void SetWalkableBool(bool b)
-    {
-        _walkableTile = b;
-    }
-    public void SetTargetBool(bool b)
-    {
-        _targetTile = b;
-    }
-    public void SetVisitedBool(bool b)
-    {
-        _visited = b;
-    }
-    public void SetParent(TilesScript t)
-    {
-        _parent = t;
-    }
-    public void SetDistance(int d)
-    {
-        _distance = d;
-    }
-
-    //GETTERS
-
-    public bool GetSelectableBool()
-    {
-        return _selectableTile;
-    }
-    public bool GetCurrentBool()
-    {
-        return _currentTile;
-    }
-    public bool GetWalkableBool()
-    {
-        return _walkableTile;
-    }
-    public bool GetTargetBool()
-    {
-        return _targetTile;
-    }
-    public bool GetVisitedBool()
-    {
-        return _visited;
-    }
-    public TilesScript GetPArent()
-    {
-        return _parent;
-    }
-    public int GetDistance()
-    {
-        return _distance;
-    }
-
 }
