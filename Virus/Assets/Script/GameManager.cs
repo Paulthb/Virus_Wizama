@@ -6,6 +6,7 @@ namespace Assets.Script
 {
     public class GameManager
     {
+        #region Singleton
         static GameManager _manger = null;
 
         public static GameManager GetManager()
@@ -16,7 +17,9 @@ namespace Assets.Script
             }
             return _manger;
         }
+        #endregion
 
+        #region Properties
         private List<BombeScript> m_bombList;
         public List<BombeScript> bombList
         {
@@ -24,12 +27,8 @@ namespace Assets.Script
             set { m_bombList = value; }
         }
 
-        public Player[] m_playerTab;
-        public Player m_currentPlayer;
-        public TilesScript[] m_tilesTab;
-
         public int m_diceValue;
-        public int _diceValue// ceci est une propertie;
+        public int diceValue// ceci est une propertie;
         {
             get { return m_diceValue; }
             set
@@ -39,14 +38,30 @@ namespace Assets.Script
                     ChangePlayerRound();//changement de tour quand le compteur du dé est à 0;
             }
         }
+        #endregion
 
+        #region Variable
+        public enum PlayerRound
+        {
+            P1 = 0,
+            P2,
+            P3,
+            P4
+        }
+        public PlayerRound m_currentPlayerRound = PlayerRound.P1;
+
+        public Player[] m_playerTab;
+        public Player m_currentPlayer;
+        public TilesScript[] m_tilesTab;
+
+        private List<TilesScript> _selectableTiles = new List<TilesScript>();
+        private Stack<TilesScript> path = new Stack<TilesScript>(); // je sais pas encore à quoi ça sert
+        private TilesScript _currentTile;
+        #endregion
+
+        #region Pathfinding
         // -------------------- ADD 22/11 (Tactical Movement)
 
-        List<TilesScript> _selectableTiles = new List<TilesScript>();
-
-        Stack<TilesScript> path = new Stack<TilesScript>(); // je sais pas encore à quoi ça sert
-        TilesScript _currentTile;
-        
         public TilesScript GetCurrentTile(Player player)  //Détecte la tile sur laquelle le Player est situé
         {
             foreach(TilesScript item in m_tilesTab)
@@ -78,47 +93,35 @@ namespace Assets.Script
             Queue<TilesScript> _process = new Queue<TilesScript>();
 
             _process.Enqueue(_currentTile);
-            _currentTile.SetVisitedBool(true);
+            _currentTile.visited = true;
 
             while(_process.Count > 0)
             {
                 TilesScript t = _process.Dequeue();
 
                 _selectableTiles.Add(t);
-                t.SetSelectableBool(true);
+                t.selectableTile = true;
 
-                if(t.GetDistance() < m_diceValue)
-                {     
+                if(t.distance < m_diceValue)
+                {
 
-                    foreach(TilesScript tile in t._adjacentTiles)
+                    foreach (TilesScript tile in t._adjacentTiles)
                     {
-                        if(!tile.GetVisitedBool())
+                        if(!tile.visited)
                         {
-                            tile.SetParent(t);
-                            tile.SetVisitedBool(true);
-                            tile.SetDistance(1 + t.GetDistance());
+                            tile.parent = t;
+                            tile.visited = true;
+                            tile.distance = 1 + t.distance;
                             _process.Enqueue(tile);
                         }
                     }
                 }
             }
         }
-
-        
+        #endregion
 
         // ---------------------   
-        
-        public enum PlayerRound
-        {
-            P1 = 0,
-            P2,
-            P3,
-            P4
-        }
-        public PlayerRound m_currentPlayerRound = PlayerRound.P1;
-
-        
-
+  
         public void InitGame(Player[] playerTab)
         {
             m_playerTab = playerTab;
@@ -183,13 +186,13 @@ namespace Assets.Script
 
         public void MovePlayer(GameObject tile)//appelé lorsqu'on click sur une tiles accessible par le player;
         {
-            if (tile.GetComponent<TilesScript>().GetWalkableBool())
+            if (tile.GetComponent<TilesScript>().walkableTile)
             {
-                GetCurrentTile(m_currentPlayer).SetWalkableBool(true);
+                GetCurrentTile(m_currentPlayer).walkableTile = true;
                 m_currentPlayer.transform.position = tile.transform.position;
                 TilesScript tileObject = tile.GetComponent<TilesScript>();
-                _diceValue -= tileObject.GetDistance();
-                tileObject.SetWalkableBool(false);
+                diceValue -= tileObject.distance;
+                tileObject.walkableTile = false;
                 foreach (TilesScript t in m_tilesTab)
                     t.Reset();
 

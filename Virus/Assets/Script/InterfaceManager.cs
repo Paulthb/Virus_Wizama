@@ -20,12 +20,12 @@ public class InterfaceManager : MonoBehaviour {
     public void PlaceBomb()
     {
         Instantiate(Bomb, GameManager.GetManager().m_currentPlayer.transform.position, Quaternion.identity);
-        GameManager.GetManager().GetCurrentTile(GameManager.GetManager().m_currentPlayer).SetWalkableBool(false);
+        GameManager.GetManager().GetCurrentTile(GameManager.GetManager().m_currentPlayer).walkableTile = false;
     }
 
     public void EndTurn()
     {
-        GameManager.GetManager()._diceValue = 0;
+        GameManager.GetManager().diceValue = 0;
     }
 }
 ////////////////garder le interfaceManager ou non ?? fin du tour a faire aussi
