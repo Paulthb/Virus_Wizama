@@ -83,6 +83,8 @@ public class TilesScript : MonoBehaviour {
     public TilesType m_currentTilesType = TilesType.NORMAL;///////////////////////// ENUM de la tiles
 
     private SpriteRenderer _spriteRenderer;
+    [SerializeField]
+    private Sprite _normalSprite;
     private float _width;
     private Color _redColor;
     private Vector2 _size;
@@ -126,6 +128,11 @@ public class TilesScript : MonoBehaviour {
 
     }
 
+    public void SwitchSprite()
+    {
+        if (walkableTile)
+            _spriteRenderer.sprite = _normalSprite;
+    }
 
     public void Reset()
     {
