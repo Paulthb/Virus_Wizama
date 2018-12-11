@@ -64,6 +64,11 @@ public class TilesScript : MonoBehaviour {
         set { _distance= value; }
     }
 
+
+    /// ////////////////////////pour debug
+    private bool couleurDebug = false;
+
+
     //Variables hors tuto
 
     private int m_id;
@@ -74,6 +79,7 @@ public class TilesScript : MonoBehaviour {
     }
     #endregion
 
+    #region Variable
     public enum TilesType
     {
         NORMAL = 0,
@@ -89,6 +95,14 @@ public class TilesScript : MonoBehaviour {
     private Color _redColor;
     private Vector2 _size;
     public Color _exploseColor;
+
+    private Player _currentPlayerOnTile;
+    public Player currentPlayerOnTile
+    {
+        get { return _currentPlayerOnTile; }
+        set { _currentPlayerOnTile = value; }
+    }
+    #endregion
 
     private void Start()
     {
@@ -122,10 +136,14 @@ public class TilesScript : MonoBehaviour {
         {
             _spriteRenderer.color = Color.red;
         }
+        else if (couleurDebug)
+            _spriteRenderer.color = Color.yellow;
+
         else
         {
             _spriteRenderer.color = Color.white;
         }
+
 
     }
 
@@ -168,11 +186,28 @@ public class TilesScript : MonoBehaviour {
         }
     }
 
+    public void TileExplode()
+    {
+        if (m_currentTilesType == TilesScript.TilesType.WALL)/////////// ça doit être dans le tileScripte
+        {
+            m_currentTilesType = TilesScript.TilesType.NORMAL;
+            walkableTile = true;
+            SwitchSprite();
+        }
+        destroyTile = false;
+
+        if (_currentPlayerOnTile)
+            _currentPlayerOnTile.Die();
+
+        couleurDebug = true;
+    }
+
     void OnMouseDown()
     {
         if (_selectableTile)
         {
             GameManager.GetManager().MovePlayer(gameObject);
+            GameManager.GetManager().currentPlayer.Move(this);
         }
     }
 }

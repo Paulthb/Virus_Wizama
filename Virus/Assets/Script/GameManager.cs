@@ -50,8 +50,18 @@ namespace Assets.Script
         }
         public PlayerRound m_currentPlayerRound = PlayerRound.P1;
 
-        public Player[] m_playerTab;
+        public List<Player> m_playerList;
+        public List<PlayerRound> m_PlayerRoundList;
+        private int IndexRound;
+
         public Player m_currentPlayer;
+        public Player currentPlayer
+        {
+            get { return m_currentPlayer; }
+            set { m_currentPlayer = value; }
+        }
+
+
         public TilesScript[] m_tilesTab;
 
         private List<TilesScript> _selectableTiles = new List<TilesScript>();
@@ -122,13 +132,20 @@ namespace Assets.Script
 
         // ---------------------   
   
-        public void InitGame(Player[] playerTab)
+        public void InitGame(List<Player> playerList)
         {
-            m_playerTab = playerTab;
+            m_playerList = playerList;
             PlayerPosition();
-            m_currentPlayer = playerTab[0];
+            m_currentPlayer = m_playerList[0];
             NextRound();
             m_bombList = new List<BombeScript>();
+
+            m_PlayerRoundList = new List<PlayerRound>();
+            m_PlayerRoundList.Add(PlayerRound.P1);
+            m_PlayerRoundList.Add(PlayerRound.P2);
+            m_PlayerRoundList.Add(PlayerRound.P3);
+            m_PlayerRoundList.Add(PlayerRound.P4);
+
         }
 
         public void InitTilesTab(TilesScript[] TilesTab)
@@ -140,42 +157,32 @@ namespace Assets.Script
             }*/
         }
 
-        public void PlayerPosition()
+        public void PlayerPosition()///////// à améliorer
         {
-            m_playerTab[0].transform.position = m_tilesTab[15].transform.position;
-            m_playerTab[1].transform.position = m_tilesTab[26].transform.position;
-            m_playerTab[2].transform.position = m_tilesTab[99].transform.position;
-            m_playerTab[3].transform.position = m_tilesTab[110].transform.position;
+            m_playerList[0].transform.position = m_tilesTab[15].transform.position;
+            m_playerList[0].currentTile = m_tilesTab[15];
+
+            m_playerList[1].transform.position = m_tilesTab[26].transform.position;
+            m_playerList[1].currentTile = m_tilesTab[26];
+
+            m_playerList[2].transform.position = m_tilesTab[99].transform.position;
+            m_playerList[2].currentTile = m_tilesTab[99];
+
+            m_playerList[3].transform.position = m_tilesTab[110].transform.position;
+            m_playerList[3].currentTile = m_tilesTab[110];
         }
 
-        public void ChangePlayerRound() // pas ouf peut être...
+        public void ChangePlayerRound() // meilleur maintenant
         {
             CheckOnBomb();
 
-            if(m_currentPlayerRound == PlayerRound.P1)
-            {
-                m_currentPlayerRound = PlayerRound.P2;
-                m_currentPlayer = m_playerTab[1];
-                NextRound();
-            }
-            else if (m_currentPlayerRound == PlayerRound.P2)
-            {
-                m_currentPlayerRound = PlayerRound.P3;
-                m_currentPlayer = m_playerTab[2];
-                NextRound();
-            }
-            else if (m_currentPlayerRound == PlayerRound.P3)
-            {
-                m_currentPlayerRound = PlayerRound.P4;
-                m_currentPlayer = m_playerTab[3];
-                NextRound();
-            } 
-            else
-            {
-                m_currentPlayerRound = PlayerRound.P1;
-                m_currentPlayer = m_playerTab[0];
-                NextRound();
-            }
+            IndexRound += 1;
+            if (IndexRound > m_playerList.Count - 1)
+                IndexRound = 0;
+
+            m_currentPlayer = m_playerList[IndexRound];
+            m_currentPlayerRound = m_PlayerRoundList[IndexRound];
+            NextRound();
         }
 
         public void NextRound()//déroulement d'un tour

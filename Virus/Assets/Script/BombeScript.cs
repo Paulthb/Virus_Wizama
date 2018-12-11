@@ -49,14 +49,9 @@ public class BombeScript : MonoBehaviour {
     {
         foreach (TilesScript tile in m_affectedTiles)
         {
-            if(tile.m_currentTilesType == TilesScript.TilesType.WALL)
-            {
-                tile.m_currentTilesType = TilesScript.TilesType.NORMAL;
-                tile.walkableTile = true;
-                tile.SwitchSprite();
-            }
-            tile.destroyTile = false;
+            tile.TileExplode();
         }
+
         GameManager.GetManager().bombList.Remove(this);
         Destroy(this.gameObject);  
     }

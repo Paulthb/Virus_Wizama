@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour {
     private GameObject[] _tilePrefabs;
 
     [SerializeField]
-    private Player[] m_playerTab;
+    private List<Player> m_playerList;
 
     [SerializeField]
     private String _levelName = "Level1";
@@ -60,7 +60,7 @@ public class LevelManager : MonoBehaviour {
         }
 
         GameManager.GetManager().InitTilesTab(TilesList.ToArray());//on envoie la liste de tiles sous forme de tableau au gameManager
-        GameManager.GetManager().InitGame(m_playerTab);
+        GameManager.GetManager().InitGame(m_playerList);
     }
 
     private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)

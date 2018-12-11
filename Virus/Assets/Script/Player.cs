@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Script;
 
 public class Player : MonoBehaviour {
 
-    private TilesScript _currentTile;
+    [SerializeField]
+    private int m_playerId;
+
+    private TilesScript m_currentTile;
     public TilesScript currentTile
     {
-        get { return _currentTile; }
-        set { _currentTile = value; }
+        get { return m_currentTile; }
+        set { m_currentTile = value; }
     }
 
 	// Use this for initialization
@@ -25,6 +29,21 @@ public class Player : MonoBehaviour {
     {
         Debug.Log("Je m'appelle : " + gameObject.name);
     }
-    
+
+    public void Move(TilesScript newCurrentTiles)
+    {
+        Debug.Log("Tile de base : " + m_currentTile.Id + " et la nouvelle Tile : " + newCurrentTiles.Id);
+        m_currentTile.currentPlayerOnTile = null;
+        m_currentTile = newCurrentTiles;
+        m_currentTile.currentPlayerOnTile = this;
+    }
+
+    public void Die()
+    {
+        Debug.Log(gameObject.name + " est mort normalement");
+        GameManager.GetManager().m_playerList.RemoveAt(m_playerId);
+        GameManager.GetManager().m_PlayerRoundList.RemoveAt(m_playerId);
+        Destroy(this.gameObject);
+    }
 }
 

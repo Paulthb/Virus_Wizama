@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 1413566307456544, guid: c0a5353389b1acd4cb271105b3e690b3, type: 2}
   - {fileID: 1876919252286460, guid: ebdda89516f547744885942f580e3c24, type: 2}
   - {fileID: 1145356481961504, guid: 1100180cdaa362c42836d8f1769704d8, type: 2}
-  m_playerTab:
+  m_playerList:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

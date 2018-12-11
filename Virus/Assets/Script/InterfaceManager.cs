@@ -19,8 +19,8 @@ public class InterfaceManager : MonoBehaviour {
 
     public void PlaceBomb()
     {
-        Instantiate(Bomb, GameManager.GetManager().m_currentPlayer.transform.position, Quaternion.identity);
-        GameManager.GetManager().GetCurrentTile(GameManager.GetManager().m_currentPlayer).walkableTile = false;
+        Instantiate(Bomb, GameManager.GetManager().currentPlayer.transform.position, Quaternion.identity);
+        GameManager.GetManager().GetCurrentTile(GameManager.GetManager().currentPlayer).walkableTile = false;
     }
 
     public void EndTurn()
