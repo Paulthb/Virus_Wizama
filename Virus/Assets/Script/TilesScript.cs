@@ -88,6 +88,7 @@ public class TilesScript : MonoBehaviour {
     private float _width;
     private Color _redColor;
     private Vector2 _size;
+    public Color _exploseColor;
 
     private void Start()
     {
@@ -115,7 +116,7 @@ public class TilesScript : MonoBehaviour {
         }
         else if (_destroyTile && !_selectableTile)
         {
-            _spriteRenderer.color = Color.black;
+            _spriteRenderer.color = _exploseColor;
         }
         else if (_destroyTile && _selectableTile && _walkableTile)
         {

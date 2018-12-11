@@ -22,7 +22,6 @@ public class BombeScript : MonoBehaviour {
     private float m_offset;
 
     private List<TilesScript> m_affectedTiles = new List<TilesScript>();
- 
 
     private BoxCollider2D m_boxCollider;
 	// Use this for initialization
@@ -59,8 +58,7 @@ public class BombeScript : MonoBehaviour {
             tile.destroyTile = false;
         }
         GameManager.GetManager().bombList.Remove(this);
-        Destroy(this.gameObject);
-        
+        Destroy(this.gameObject);  
     }
 
     private void GetAffectedTiles()
@@ -73,6 +71,8 @@ public class BombeScript : MonoBehaviour {
         foreach (TilesScript tile in m_affectedTiles)
             tile.destroyTile = true;
     }
+
+    #region GetAffectedTile Left Right Up Down
     private void GetAffectedTileLeft()
     {
         List<TilesScript> m_affectedTilesL = new List<TilesScript>();
@@ -90,7 +90,6 @@ public class BombeScript : MonoBehaviour {
 
         m_affectedTilesL.Sort((a, b) => (b.Id.CompareTo(a.Id)));
 
-
         int count = 0;
 
         for (count = 0; count < m_affectedTilesL.Count; count++)
@@ -106,7 +105,6 @@ public class BombeScript : MonoBehaviour {
             }
         }
 
-
         if(m_affectedTilesL.Count > 0)
         { 
             for(int i = m_affectedTilesL.Count - 1; i > count -1; i--)
@@ -118,9 +116,9 @@ public class BombeScript : MonoBehaviour {
         foreach (TilesScript tile in m_affectedTilesL)
         {
             m_affectedTiles.Add(tile);
-        }
-        
+        }    
     }
+
     private void GetAffectedTileRight()
     {
         List<TilesScript> m_affectedTilesR = new List<TilesScript>();
@@ -138,7 +136,6 @@ public class BombeScript : MonoBehaviour {
 
         m_affectedTilesR.Sort((a, b) => (a.Id.CompareTo(b.Id)));
 
-
         int count = 0;
 
         for (count = 0; count < m_affectedTilesR.Count; count++)
@@ -154,7 +151,6 @@ public class BombeScript : MonoBehaviour {
             }
         }
 
-
         if (m_affectedTilesR.Count > 0)
         {
             for (int i = m_affectedTilesR.Count - 1; i > count - 1; i--)
@@ -167,9 +163,8 @@ public class BombeScript : MonoBehaviour {
         {
             m_affectedTiles.Add(tile);
         }
-
-
     }
+
     private void GetAffectedTileUp()
     {
         List<TilesScript> m_affectedTilesU = new List<TilesScript>();
@@ -202,7 +197,6 @@ public class BombeScript : MonoBehaviour {
             }
         }
 
-
         if (m_affectedTilesU.Count > 0)
         {
             for (int i = m_affectedTilesU.Count - 1; i > count - 1; i--)
@@ -215,8 +209,6 @@ public class BombeScript : MonoBehaviour {
         {
             m_affectedTiles.Add(tile);
         }
-
-
     }
 
     private void GetAffectedTileDown()
@@ -251,7 +243,6 @@ public class BombeScript : MonoBehaviour {
             }
         }
 
-
         if (m_affectedTilesD.Count > 0)
         {
             for (int i = m_affectedTilesD.Count - 1; i > count - 1; i--)
@@ -264,9 +255,9 @@ public class BombeScript : MonoBehaviour {
         {
             m_affectedTiles.Add(tile);
         }
-
-
     }
+    #endregion
+
     private void GetOffSet()
     {
         for(int i = 1; i < m_range; i++)

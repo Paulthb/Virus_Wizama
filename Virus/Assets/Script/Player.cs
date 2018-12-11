@@ -5,6 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     private TilesScript _currentTile;
+    public TilesScript currentTile
+    {
+        get { return _currentTile; }
+        set { _currentTile = value; }
+    }
+
 	// Use this for initialization
 	void Start () {
 		
