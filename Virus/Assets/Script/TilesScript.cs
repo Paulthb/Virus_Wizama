@@ -206,8 +206,8 @@ public class TilesScript : MonoBehaviour {
     {
         if (_selectableTile)
         {
-            GameManager.GetManager().MovePlayer(gameObject);
             GameManager.GetManager().currentPlayer.Move(this);
+            GameManager.GetManager().MovePlayer(gameObject);
         }
     }
 }
