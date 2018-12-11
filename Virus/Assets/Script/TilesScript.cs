@@ -64,11 +64,6 @@ public class TilesScript : MonoBehaviour {
         set { _distance= value; }
     }
 
-
-    /// ////////////////////////pour debug
-    private bool couleurDebug = false;
-
-
     //Variables hors tuto
 
     private int m_id;
@@ -136,9 +131,6 @@ public class TilesScript : MonoBehaviour {
         {
             _spriteRenderer.color = Color.red;
         }
-        else if (couleurDebug)
-            _spriteRenderer.color = Color.yellow;
-
         else
         {
             _spriteRenderer.color = Color.white;
@@ -198,8 +190,6 @@ public class TilesScript : MonoBehaviour {
 
         if (_currentPlayerOnTile)
             _currentPlayerOnTile.Die();
-
-        couleurDebug = true;
     }
 
     void OnMouseDown()

@@ -181,7 +181,7 @@ namespace Assets.Script
                 IndexRound = 0;
 
             m_currentPlayer = m_playerList[IndexRound];
-            m_currentPlayerRound = m_PlayerRoundList[IndexRound];
+            //m_currentPlayerRound = m_PlayerRoundList[IndexRound];
             NextRound();
         }
 

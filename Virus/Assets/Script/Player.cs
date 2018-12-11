@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 
     public void Move(TilesScript newCurrentTiles)
     {
-        Debug.Log("Tile de base : " + m_currentTile.Id + " et la nouvelle Tile : " + newCurrentTiles.Id);
+        //Debug.Log("Tile de base : " + m_currentTile.Id + " et la nouvelle Tile : " + newCurrentTiles.Id);
         m_currentTile.currentPlayerOnTile = null;
         m_currentTile = newCurrentTiles;
         m_currentTile.currentPlayerOnTile = this;
@@ -41,8 +41,8 @@ public class Player : MonoBehaviour {
     public void Die()
     {
         Debug.Log(gameObject.name + " est mort normalement");
-        GameManager.GetManager().m_playerList.RemoveAt(m_playerId);
-        GameManager.GetManager().m_PlayerRoundList.RemoveAt(m_playerId);
+        GameManager.GetManager().m_playerList.Remove(this);
+        //GameManager.GetManager().m_PlayerRoundList.RemoveAt(m_playerId);//////// comment mettre à jour ?
         Destroy(this.gameObject);
     }
 }
