@@ -6,7 +6,7 @@ using Assets.Script;
 public class Player : MonoBehaviour {
 
     [SerializeField]
-    private int m_playerId;
+    public int m_playerId;
 
     private TilesScript m_currentTile;
     public TilesScript currentTile
@@ -42,8 +42,6 @@ public class Player : MonoBehaviour {
     {
         Debug.Log(gameObject.name + " est mort normalement");
         GameManager.GetManager().m_playerList.Remove(this);
-        //GameManager.GetManager().m_PlayerRoundList.RemoveAt(m_playerId);//////// comment mettre à jour ?
         Destroy(this.gameObject);
     }
 }
-

@@ -52,3 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bomb: {fileID: 1136722910116438, guid: b165937badbecdf488690e2a798d3e22, type: 2}
+  winScreen: {fileID: 0}
+  winText: {fileID: 0}
