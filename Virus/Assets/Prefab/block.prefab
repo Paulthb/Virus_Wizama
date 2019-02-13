@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adjacentTiles: []
   m_currentTilesType: 0
-  _normalSprite: {fileID: 21300000, guid: c88d8d7e26a556e48aab7de2900ac337, type: 3}
+  _normalSprite: {fileID: 21300000, guid: 7a520e79636d2904bad236a10822d003, type: 3}
   _exploseColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
 --- !u!114 &114277027123767268
 MonoBehaviour:
@@ -128,7 +128,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 751e0a1165c40d84e8d6d81d0f4dc8b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
